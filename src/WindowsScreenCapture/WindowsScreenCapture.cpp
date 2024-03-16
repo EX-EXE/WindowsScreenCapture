@@ -194,7 +194,11 @@ int wmain(int argc, wchar_t* argv[])
 
 	// Start
 	const auto startTime = std::chrono::steady_clock::now();
-	manager.Start(targetHwnd, targetHmonitor);
+	if (!manager.Start(targetHwnd, targetHmonitor))
+	{
+		std::cerr << "Failed start capture." << std::endl;
+		return 1;
+	}
 
 	// Wait Capture
 	while (WindowsUtility::IsValidHwnd(targetHwnd) ||
