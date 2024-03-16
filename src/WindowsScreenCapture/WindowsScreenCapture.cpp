@@ -74,7 +74,7 @@ int wmain(int argc, wchar_t* argv[])
 	{
 		// DirectXTK
 		std::cout << "[Licence]" << std::endl;
-		std::cout << "EDirectXTK" << std::endl;
+		std::cout << "ÂEDirectXTK" << std::endl;
 		std::cout << R"(
     MIT License
 
@@ -156,7 +156,7 @@ int wmain(int argc, wchar_t* argv[])
 	{
 		std::cerr << "No arguments specified.(/ProcessId: or /ProcessName:)" << std::endl;
 		std::cerr << "ex. /ProcessId: 10000" << std::endl;
-		std::cerr << "ex. /ProcessName: explorer.exe" << std::endl;
+		std::cerr << "ex. /ProcessName: Taskmgr.exe" << std::endl;
 		return 1;
 	}
 
