@@ -55,6 +55,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         name: ${{ env.APP_NAME }} Ver.${{ env.VERSION }}
-        files: ./${{ env.BUILD_PLATFORM }}/${{ env.BUILD_CONFIGURATION }}/${{ env.ASSEMBLY_NAME }}.*
+        files: ${{env.GITHUB_WORKSPACE}}/${{ env.BUILD_PLATFORM }}/${{ env.BUILD_CONFIGURATION }}/${{ env.ASSEMBLY_NAME }}.*
         tag_name: Release/${{ env.VERSION }}
         
