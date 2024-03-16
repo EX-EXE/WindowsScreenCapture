@@ -2,16 +2,18 @@
 name: Release
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
   workflow_dispatch:
     inputs:
       version:
         description: "version(ex. 1.0.0)"
         required: true
         default: "0.0.0"
+        
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 env:
   VERSION: ${{ github.event.inputs.version }}
@@ -56,4 +58,3 @@ jobs:
         name: ${{ env.APP_NAME }} Ver.${{ env.VERSION }}
         files: .\\${{ env.BUILD_PLATFORM }}\\${{ env.BUILD_CONFIGURATION }}\\${{ env.ASSEMBLY_NAME }}.*
         tag_name: Release/${{ env.VERSION }}
-        
