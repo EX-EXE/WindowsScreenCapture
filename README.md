@@ -2,7 +2,7 @@
 
 ## Arguments
 
-|Parameter|Description|Example|
+|Argument|Description|Example|
 |-|-|-|
 | /Output: | Specify the destination for saving captured data. | /Output: "C://OutputDir/Output.png" |
 | /ProcessId: | This is the Process ID (PID) of the target for capture. | /ProcessId: 10000 |
