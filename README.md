@@ -1,5 +1,8 @@
 # WindowsScreenCapture
 
+
+![Sample](https://github.com/EX-EXE/WindowsScreenCapture/assets/114784289/f87d27c3-f03c-4546-ac8e-c281d209a349)
+
 ## Arguments
 
 |Argument|Description|Example|
