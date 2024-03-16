@@ -43,13 +43,18 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=${{env.BUILD_PLATFORM}} ${{env.SOLUTION_FILE_PATH}}
 
+    - name: Test
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: dir
+
     - name: Upload Release Asset
       id: upload-release-asset 
       uses: softprops/action-gh-release@v1
+      working-directory: ${{env.GITHUB_WORKSPACE}}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         name: ${{ env.APP_NAME }} Ver.${{ env.VERSION }}
-        files: .\\${{ env.BUILD_PLATFORM }}\\${{ env.BUILD_CONFIGURATION }}\\${{ env.ASSEMBLY_NAME }}.*
+        files: ./${{ env.BUILD_PLATFORM }}/${{ env.BUILD_CONFIGURATION }}/${{ env.ASSEMBLY_NAME }}.*
         tag_name: Release/${{ env.VERSION }}
         
