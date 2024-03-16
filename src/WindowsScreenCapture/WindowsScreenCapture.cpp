@@ -69,12 +69,35 @@ int wmain(int argc, wchar_t* argv[])
 	auto argMap = ParseArgs(argc, argv);
 
 	// Args
-	// CaptureCursor
-	auto captureCursor = false;
-	if (auto captureCursorItr = argMap.find(L"capturecursor"); captureCursorItr != argMap.end() &&
-		(captureCursorItr->second == L"1" || captureCursorItr->second == L"Enable" || captureCursorItr->second == L"True"))
+	// Licence
+	if (auto outputItr = argMap.find(L"licence"); outputItr != argMap.end())
 	{
-		captureCursor = true;
+		// DirectXTK
+		std::cout << "[Licence]" << std::endl;
+		std::cout << "EDirectXTK" << std::endl;
+		std::cout << R"(
+    MIT License
+
+    Copyright (c) Microsoft Corporation.
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE
+)" << std::endl;
 	}
 
 	// Output
@@ -85,7 +108,17 @@ int wmain(int argc, wchar_t* argv[])
 	}
 	else
 	{
+		std::cerr << "No arguments specified.(/Output:)" << std::endl;
+		std::cerr << "ex. /Output: c://output.png" << std::endl;
 		return 1;
+	}
+
+	// CaptureCursor
+	auto captureCursor = false;
+	if (auto captureCursorItr = argMap.find(L"capturecursor"); captureCursorItr != argMap.end() &&
+		(captureCursorItr->second == L"1" || captureCursorItr->second == L"Enable" || captureCursorItr->second == L"True"))
+	{
+		captureCursor = true;
 	}
 
 	auto targetHwnd = (HWND)nullptr;
@@ -121,6 +154,9 @@ int wmain(int argc, wchar_t* argv[])
 	}
 	if (!targetHwnd && !targetHmonitor)
 	{
+		std::cerr << "No arguments specified.(/ProcessId: or /ProcessName:)" << std::endl;
+		std::cerr << "ex. /ProcessId: 10000" << std::endl;
+		std::cerr << "ex. /ProcessName: explorer.exe" << std::endl;
 		return 1;
 	}
 
@@ -187,17 +223,21 @@ int wmain(int argc, wchar_t* argv[])
 	// Invalid
 	if (targetHwnd && !WindowsUtility::IsValidHwnd(targetHwnd))
 	{
+		std::cerr << "Could not get window." << std::endl;
 		return 1;
 	}
 	if (targetHmonitor && !WindowsUtility::IsValidHmonitor(targetHmonitor))
 	{
+		std::cerr << "Could not get monitor." << std::endl;
 		return 1;
 	}
 	// Timeout
 	if (!exitFlag.load(std::memory_order_acquire))
 	{
+		std::cerr << "Capture timed out." << std::endl;
 		return 1;
 	}
 	// Success
+	std::wcout << outputFile.c_str() << std::endl;
 	return 0;
 }

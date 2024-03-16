@@ -1,5 +1,7 @@
 ﻿#include "ScreenCaptureManager.h"
 
+#include <iostream>
+
 //! IInspectable
 #include <inspectable.h>
 
@@ -77,6 +79,9 @@ bool ScreenCaptureManager::Start(HWND hwnd, HMONITOR hmonitor)
 	{
 		const auto code = e.code();
 		const auto message = e.message();
+		std::cerr << "Exception." << std::endl;
+		std::cerr << "Code : " << code << std::endl;
+		std::wcerr << "Message : " << message.c_str() << std::endl;
 		return false;
 	}
 }
@@ -153,5 +158,8 @@ void ScreenCaptureManager::OnFrameArrived(winrt::Windows::Graphics::Capture::Dir
 	{
 		const auto code = e.code();
 		const auto message = e.message();
+		std::cerr << "Exception." << std::endl;
+		std::cerr << "Code : " << code << std::endl;
+		std::wcerr << "Message : " << message.c_str() << std::endl;
 	}
 }
