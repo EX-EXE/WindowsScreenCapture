@@ -16,5 +16,10 @@ Capture window or monitor using 'Windows Graphics Capture' from the command line
 | /TimeoutSec: | This specifies the timeout duration for capturing (in seconds) | /TimeoutSec: 10.0 |
 | /Licence: | Displays the license of the library being used. | /Licence: |
 
+## Example
+```
+WindowsScreenCapture.exe /ProcessName: Taskmgr.exe /Output: ./output.png
+```
+
 ## Packages
 - [DirectXTK](https://github.com/microsoft/DirectXTK)
