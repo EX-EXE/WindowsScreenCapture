@@ -21,5 +21,9 @@ Capture window or monitor using 'Windows Graphics Capture' from the command line
 WindowsScreenCapture.exe /ProcessName: Taskmgr.exe /Output: ./output.png
 ```
 
+```
+WindowsScreenCapture.exe /Monitor: 0 /Output: ./output.png
+```
+
 ## Packages
 - [DirectXTK](https://github.com/microsoft/DirectXTK)
