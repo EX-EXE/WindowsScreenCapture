@@ -247,7 +247,9 @@ int wmain(int argc, wchar_t* argv[])
 				texture2DPtr.get(),
 				format,
 				outputFile.c_str(),
-				&GUID_WICPixelFormat32bppBGRA);
+				&GUID_WICPixelFormat32bppBGRA,
+				nullptr,
+				true);
 			winrt::check_hresult(result);
 			exitFlag.store(true, std::memory_order_release);
 		});
