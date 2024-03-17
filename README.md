@@ -1,5 +1,5 @@
 # WindowsScreenCapture
-Use 'Windows Graphics Capture' to capture window or monitor.
+Capture window or monitor using 'Windows Graphics Capture' from the command line.
 
 ![Sample](https://github.com/EX-EXE/WindowsScreenCapture/assets/114784289/f87d27c3-f03c-4546-ac8e-c281d209a349)
 
