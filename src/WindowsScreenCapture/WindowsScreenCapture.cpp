@@ -102,6 +102,7 @@ int wmain(int argc, wchar_t* argv[])
 
 	// Output
 	auto outputFile = std::wstring();
+	auto outputFormat = std::wstring();
 	if (auto outputItr = argMap.find(L"output"); outputItr != argMap.end())
 	{
 		outputFile = outputItr->second;
@@ -111,6 +112,14 @@ int wmain(int argc, wchar_t* argv[])
 		std::cerr << "No arguments specified.(/Output:)" << std::endl;
 		std::cerr << "ex. /Output: c://output.png" << std::endl;
 		return 1;
+	}
+	if (auto outputItr = argMap.find(L"format"); outputItr != argMap.end())
+	{
+		outputFormat = outputItr->second;
+		std::transform(
+			outputFormat.begin(),
+			outputFormat.end(),
+			outputFormat.begin(), ::tolower);
 	}
 
 	// CaptureCursor
@@ -182,10 +191,61 @@ int wmain(int argc, wchar_t* argv[])
 			{
 				return;
 			}
-			auto result = DirectX::SaveWICTextureToFile(
+
+			auto format = GUID_ContainerFormatPng;
+			if (outputFormat == L"bmp")
+			{
+				format = GUID_ContainerFormatBmp;
+			}
+			else if (outputFormat == L"png")
+			{
+				format = GUID_ContainerFormatPng;
+			}
+			else if (outputFormat == L"ico")
+			{
+				format = GUID_ContainerFormatIco;
+			}
+			else if (outputFormat == L"jpeg")
+			{
+				format = GUID_ContainerFormatJpeg;
+			}
+			else if (outputFormat == L"tiff")
+			{
+				format = GUID_ContainerFormatTiff;
+			}
+			else if (outputFormat == L"gif")
+			{
+				format = GUID_ContainerFormatGif;
+			}
+			else if (outputFormat == L"wmp")
+			{
+				format = GUID_ContainerFormatWmp;
+			}
+			else if (outputFormat == L"dds")
+			{
+				format = GUID_ContainerFormatDds;
+			}
+			else if (outputFormat == L"adng")
+			{
+				format = GUID_ContainerFormatAdng;
+			}
+			else if (outputFormat == L"heif")
+			{
+				format = GUID_ContainerFormatHeif;
+			}
+			else if (outputFormat == L"webp")
+			{
+				format = GUID_ContainerFormatWebp;
+			}
+			else if (outputFormat == L"raw")
+			{
+				format = GUID_ContainerFormatRaw;
+			}
+
+			const auto result = DirectX::SaveWICTextureToFile(
 				d3d11DeviceContextPtr.get(),
 				texture2DPtr.get(),
-				GUID_ContainerFormatPng,
+				format,
 				outputFile.c_str(),
 				&GUID_WICPixelFormat32bppBGRA);
 			winrt::check_hresult(result);
